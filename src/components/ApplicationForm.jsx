@@ -1,8 +1,13 @@
 import { useState } from "react";
 import { STATUSES, emptyForm } from "../constants";
 
-function ApplicationForm({ onAdd }) {
-  const [form, setForm] = useState(emptyForm);
+function ApplicationForm({ onSave, editingApp, onCancel }) {
+  // If editing, start with that application's values
+  const [form, setForm] = useState(
+    editingApp
+      ? { ...editingApp, skills: editingApp.skills.join(", ") }
+      : emptyForm
+  );
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -12,21 +17,23 @@ function ApplicationForm({ onAdd }) {
   function handleSubmit(e) {
     e.preventDefault();
 
-    const newApp = {
+    const saved = {
       ...form,
-      id: Date.now(),
+      id: editingApp ? editingApp.id : Date.now(),
       skills: form.skills
         .split(",")
         .map((s) => s.trim())
         .filter((s) => s !== ""),
     };
 
-    onAdd(newApp); // hand the new application to the boss (App)
-    setForm(emptyForm);
+    onSave(saved);
+    if (!editingApp) setForm(emptyForm);
   }
 
   return (
     <form onSubmit={handleSubmit}>
+      <h2>{editingApp ? "Edit application" : "Add an application"}</h2>
+
       <input
         name="company"
         placeholder="Company name"
@@ -72,7 +79,17 @@ function ApplicationForm({ onAdd }) {
         value={form.notes}
         onChange={handleChange}
       />
-      <button type="submit">Add application</button>
+
+      <div className="form-actions">
+        <button type="submit">
+          {editingApp ? "Save changes" : "Add application"}
+        </button>
+        {editingApp && (
+          <button type="button" onClick={onCancel}>
+            Cancel
+          </button>
+        )}
+      </div>
     </form>
   );
 }

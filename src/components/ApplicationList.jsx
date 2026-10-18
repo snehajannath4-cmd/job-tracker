@@ -1,6 +1,6 @@
 import ApplicationCard from "./ApplicationCard";
 
-function ApplicationList({ applications, onStatusChange }) {
+function ApplicationList({ applications, onStatusChange, onEdit, onDelete }) {
   if (applications.length === 0) {
     return <p>No applications yet.</p>;
   }
@@ -12,6 +12,8 @@ function ApplicationList({ applications, onStatusChange }) {
           key={app.id}
           app={app}
           onStatusChange={onStatusChange}
+          onEdit={onEdit}
+          onDelete={onDelete}
         />
       ))}
     </div>

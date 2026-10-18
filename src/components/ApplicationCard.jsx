@@ -1,6 +1,6 @@
 import { STATUSES } from "../constants";
 
-function ApplicationCard({ app, onStatusChange }) {
+function ApplicationCard({ app, onStatusChange, onEdit, onDelete }) {
   return (
     <div className="card">
       <h3>{app.company}</h3>
@@ -18,16 +18,28 @@ function ApplicationCard({ app, onStatusChange }) {
 
       {app.notes && <p className="notes">{app.notes}</p>}
 
-      <select
-        value={app.status}
-        onChange={(e) => onStatusChange(app.id, e.target.value)}
-      >
-        {STATUSES.map((s) => (
-          <option key={s} value={s}>
-            {s}
-          </option>
-        ))}
-      </select>
+      <div className="card-actions">
+        <select
+          value={app.status}
+          onChange={(e) => onStatusChange(app.id, e.target.value)}
+        >
+          {STATUSES.map((s) => (
+            <option key={s} value={s}>
+              {s}
+            </option>
+          ))}
+        </select>
+        <button type="button" onClick={() => onEdit(app.id)}>
+          Edit
+        </button>
+        <button
+          type="button"
+          className="danger"
+          onClick={() => onDelete(app.id)}
+        >
+          Delete
+        </button>
+      </div>
     </div>
   );
 }

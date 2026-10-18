@@ -53,3 +53,18 @@ button {
 .notes {
   color: #555;
 }
+.form-actions,
+.card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.card-actions {
+  margin-top: 10px;
+}
+
+.danger {
+  color: #b3302f;
+}
