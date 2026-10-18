@@ -7,17 +7,20 @@
 
 form {
   display: flex;
+  flex-direction: column;
   gap: 8px;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
-input {
-  flex: 1;
+input,
+select,
+textarea {
   padding: 8px;
+  font-size: 1rem;
 }
 
 button {
-  padding: 8px 16px;
+  padding: 10px 16px;
   cursor: pointer;
 }
 
@@ -25,5 +28,28 @@ button {
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 12px;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
+}
+
+.card h3,
+.card p {
+  margin: 4px 0;
+}
+
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 8px 0;
+}
+
+.skill {
+  background: #eee;
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-size: 0.85rem;
+}
+
+.notes {
+  color: #555;
 }
